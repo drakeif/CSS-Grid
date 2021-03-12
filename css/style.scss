@@ -10,6 +10,9 @@ $footer: #1B2429;
 $f1: #4E5355;
 $f2: #707476;
 $gutter: 20px;
+@mixin point($width) {
+    @media only screen and (max-width: $width + 'px') {@content;}
+}
 @mixin footer {
     color: $f1;
     font-weight: 400;
@@ -67,6 +70,12 @@ img {
             font-weight: 500;
             text-transform: uppercase;
             margin-bottom: 50px;
+            @include point(768) {
+                font-size: 40px;
+            }
+            @include point(500) {
+                font-size: 30px;
+            }
         }
     }
     &:after {
@@ -125,6 +134,10 @@ img {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 5px;
+    @include point(768) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+    }
     &__item {
         position: relative;
         background-image: url("../img/img-1.jpg");
@@ -164,11 +177,17 @@ img {
             background-image: url("../img/img-4.jpg");
             grid-column: span 1;
             grid-row: span 1;
+            @include point(768) {
+                grid-column: span 2;
+            }
         }
         &:nth-child(5) {
             background-image: url("../img/img-5.jpg");
             grid-column: span 2;
             grid-row: span 1;
+            @include point(768) {
+                grid-column: span 1;
+            }
         }
         &:nth-child(6) {
             background-image: url("../img/img-6.jpg");
@@ -219,22 +238,44 @@ img {
 .ready {
     padding: 100px 0;
     background: $light;
+    @include point(768) {
+        padding: 50px 0;
+    }
+    @include point(768) {
+        padding: 25px 0;
+    }
     &__inner {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        @include point(768) {
+            grid-template-columns: auto;
+            justify-items: center;
+        }
         &_block {
             color: $txt;
             h2 {
                 font-size: 34px;
                 font-weight: 400;
                 margin-bottom: 40px;
-            }
+                @include point(768) {
+                    font-size: 28px;
+                }
+                @include point(500) {
+                    font-size: 22px;
+                }
+            } 
             p {
                 max-width: 500px;
                 font-size: 18px;
                 margin-bottom: 20px;
                 &:last-child {
                     margin-bottom: 0;
+                }
+                @include point(768) {
+                    font-size: 14px;
+                }
+                @include point(500) {
+                    font-size: 12px;
                 }
             }
         }
@@ -250,6 +291,14 @@ img {
         display: grid;
         grid-template-columns: repeat(4, auto);
         justify-content: space-between;
+        @include point(1140) {
+            grid-template-columns: repeat(2, auto);
+            justify-content: center;
+            gap: 5px;
+        }
+        @include point(650) {
+            grid-template-columns: auto;
+        }
         input {
             display: inline-block;
             min-width: 300px;
@@ -263,10 +312,13 @@ img {
                 font-size: 16px;
                 color: $input;
             }
+            @include point(650) {
+                min-width: 200px;
+            }
         }
         a {
             display: inline-block;
-            width: 200px;
+            min-width: 200px;
             height: auto;
             color: $white;
             font-size: 20px;
@@ -282,6 +334,12 @@ img {
                 background: transparent;
                 outline: 1.5px solid $accent;
             } 
+            @include point(1140) {
+                min-width: 300px;
+            }
+            @include point(650) {
+                min-width: 200px;
+            }
         }
     }
 }
@@ -289,19 +347,46 @@ img {
 .cards {
     padding: 100px 0;
     color: $txt;
+    @include point(768) {
+        padding: 50px 0;
+    }
+    @include point(768) {
+        padding: 25px 0;
+    }
     &__title {
         font-size: 34px;
         font-weight: 400;
         margin-bottom: 60px;
+        @include point(768) {
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+        @include point(500) {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
     }
     &__inner {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
+        @include point(768) {
+            grid-template-columns: repeat(2, 1fr);
+        }
         &_item {
+            background: $light;
             height: 550px;
+            cursor: pointer;
+            overflow: hidden;
             img {
                 margin-bottom: 35px;
+                transition: .2s ease-in-out;
+                @include point(500) {
+                    margin-bottom: 20px;
+                }
+                @include point(500) {
+                    margin-bottom: 10px;
+                }
             }
             h3 {
                 padding: 0 40px;
@@ -309,10 +394,24 @@ img {
                 text-align: center;
                 font-weight: 500;
                 margin-bottom: 30px;
+                @include point(500) {
+                    font-size: 16px;
+                    margin-bottom: 20px;
+                }
+                @include point(500) {
+                    font-size: 14px;
+                    margin-bottom: 10px;
+                }
             }
             p {
                 padding: 0 20px 5px 20px;
                 text-align: center;
+                @include point(500) {
+                    font-size: 12px;
+                }
+                @include point(500) {
+                    font-size: 10px;
+                }
             }
             &:nth-child(1) {
                 grid-column: span 1;
@@ -325,6 +424,9 @@ img {
             }
             &:nth-child(4) {
                 grid-column: span 2;
+                @include point(768){
+                   grid-row: span 1 / 5;
+                }
             }
             &:nth-child(5) {
                 grid-column: span 1;
@@ -332,12 +434,21 @@ img {
             &:nth-child(6) {
                 grid-column: span 1;
             }
+            &:hover img {
+                transform: scale(1.05);
+            }
+            @include point(500) {
+                height: 390px;
+            }
         }
     }
 }
 //DOWNLOAD
 .download {
     padding: 25px 0;
+    @include point(500) {
+        padding: 5px 0;
+    }
        text-align: center;
     a {
         text-decoration: underline;
